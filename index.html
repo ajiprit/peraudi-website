@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perhimpunan Audiologis Indonesia</title>
+    <!-- Font & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+    <style>
+        /* ===== RESET & VARIABEL ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0a3b7a;
+            /* biru tua profesional */
+            --primary-light: #1a5cb0;
+            --secondary: #c62828;
+            /* merah maroon */
+            --secondary-light: #e53935;
+            --accent: #e8f0fe;
+            --text-dark: #1e293b;
+            --text-muted: #475569;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font: 'Inter', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font);
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        ul {
+            list-style: none;
+        }
+        img {
+            max-width: 100%;
+            display: block;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: 0 4px 14px rgba(10, 59, 122, 0.25);
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(10, 59, 122, 0.35);
+            background: var(--primary-light);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            box-shadow: none;
+        }
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+        .btn-red {
+            background: var(--secondary);
+            box-shadow: 0 4px 14px rgba(198, 40, 40, 0.25);
+        }
+        .btn-red:hover {
+            background: var(--secondary-light);
+            box-shadow: 0 8px 24px rgba(198, 40, 40, 0.35);
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            background: var(--white);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            padding: 12px 0;
+            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.92);
+        }
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: var(--primary);
+        }
+        .logo i {
+            font-size: 1.8rem;
+            color: var(--secondary);
+        }
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            transition: var(--transition);
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: var(--transition);
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--bg-light);
+            border-radius: 50px;
+            padding: 6px 16px 6px 20px;
+            border: 1px solid #e2e8f0;
+            transition: var(--transition);
+        }
+        .search-box:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(10, 59, 122, 0.1);
+        }
+        .search-box input {
+            border: none;
+            background: transparent;
+            padding: 8px 0;
+            font-size: 0.9rem;
+            outline: none;
+            width: 140px;
+            font-family: var(--font);
+        }
+        .search-box button {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 4px 0 4px 8px;
+        }
+        .search-box button:hover {
+            color: var(--primary);
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(145deg, var(--primary) 0%, #0d2847 100%);
+            color: var(--white);
+            padding: 80px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(198, 40, 40, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-content h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 16px;
+        }
+        .hero-content h1 span {
+            color: #f9c74f;
+        }
+        .hero-content p {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            max-width: 500px;
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .hero-buttons .btn-outline {
+            border-color: rgba(255, 255, 255, 0.5);
+            color: var(--white);
+        }
+        .hero-buttons .btn-outline:hover {
+            background: var(--white);
+            color: var(--primary);
+            border-color: var(--white);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero-image .card-icon {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(6px);
+            border-radius: var(--radius);
+            padding: 40px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        .hero-image .card-icon i {
+            font-size: 4.5rem;
+            color: #f9c74f;
+            margin-bottom: 16px;
+        }
+        .hero-image .card-icon h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .hero-image .card-icon p {
+            opacity: 0.8;
+            margin-top: 8px;
+        }
+
+        /* ===== SECTION COMMON ===== */
+        section {
+            padding: 80px 0;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-title i {
+            color: var(--secondary);
+            font-size: 2rem;
+        }
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 48px;
+            max-width: 600px;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .text-center .section-subtitle {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== PROFIL ===== */
+        .profil-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+        .profil-text p {
+            margin-bottom: 16px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+        .profil-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 24px;
+        }
+        .stat-item {
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border-top: 4px solid var(--secondary);
+        }
+        .stat-item .number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        .stat-item .label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .profil-image {
+            background: var(--primary);
+            border-radius: var(--radius);
+            padding: 40px;
+            color: var(--white);
+            min-height: 260px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        }
+        .profil-image i {
+            font-size: 4rem;
+            margin-bottom: 16px;
+            opacity: 0.9;
+        }
+        .profil-image h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* ===== KEGIATAN ===== */
+        .kegiatan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+        .kegiatan-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border-bottom: 4px solid transparent;
+        }
+        .kegiatan-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
+            border-bottom-color: var(--secondary);
+        }
+        .kegiatan-card .icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 12px;
+        }
+        .kegiatan-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+        .kegiatan-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* ===== BERITA & ARTIKEL ===== */
+        .berita-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .berita-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        .berita-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow);
+        }
+        .berita-card .img-placeholder {
+            height: 180px;
+            background: linear-gradient(145deg, var(--primary-light), var(--primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 2.5rem;
+        }
+        .berita-card .body {
+            padding: 20px 24px 24px;
+        }
+        .berita-card .body .tag {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 50px;
+            margin-bottom: 10px;
+        }
+        .berita-card .body h4 {
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+        }
+        .berita-card .body p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            margin-bottom: 12px;
+        }
+        .berita-card .body .meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* ===== AGENDA ===== */
+        .agenda-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .agenda-item {
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            padding: 20px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            box-shadow: var(--shadow-sm);
+            border-left: 6px solid var(--secondary);
+            transition: var(--transition);
+        }
+        .agenda-item:hover {
+            box-shadow: var(--shadow);
+            transform: translateX(4px);
+        }
+        .agenda-item .info {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        .agenda-item .date {
+            background: var(--primary);
+            color: var(--white);
+            border-radius: var(--radius-sm);
+            padding: 8px 16px;
+            text-align: center;
+            font-weight: 700;
+            min-width: 70px;
+        }
+        .agenda-item .date .day {
+            font-size: 1.6rem;
+            line-height: 1;
+        }
+        .agenda-item .date .month {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .agenda-item .details h5 {
+            font-size: 1.05rem;
+        }
+        .agenda-item .details p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* ===== DOKUMEN ===== */
+        .dokumen-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+        }
+        .dokumen-item {
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            padding: 24px 16px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid #eef2f6;
+        }
+        .dokumen-item:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+        .dokumen-item i {
+            font-size: 2.8rem;
+            color: var(--secondary);
+            margin-bottom: 8px;
+        }
+        .dokumen-item h5 {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* ===== KEANGGOTAAN ===== */
+        .anggota-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .anggota-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border-top: 4px solid var(--primary);
+        }
+        .anggota-card:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow);
+        }
+        .anggota-card i {
+            font-size: 2.8rem;
+            color: var(--secondary);
+            margin-bottom: 12px;
+        }
+        .anggota-card h4 {
+            font-size: 1.2rem;
+        }
+        .anggota-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 8px 0 16px;
+        }
+
+        /* ===== BAKTI SOSIAL ===== */
+        .baksos {
+            background: var(--primary);
+            color: var(--white);
+            border-radius: var(--radius);
+            padding: 60px 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .baksos h2 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        .baksos p {
+            opacity: 0.9;
+            margin: 12px 0 24px;
+        }
+        .baksos .btn {
+            background: var(--white);
+            color: var(--primary);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+        }
+        .baksos .btn:hover {
+            background: #f9c74f;
+            color: var(--primary);
+        }
+        .baksos .icon-big {
+            font-size: 4rem;
+            text-align: center;
+        }
+
+        /* ===== KONTAK ===== */
+        .kontak-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+        .kontak-info {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .kontak-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: var(--white);
+            padding: 16px 24px;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-sm);
+        }
+        .kontak-item i {
+            font-size: 1.6rem;
+            color: var(--secondary);
+            width: 40px;
+            text-align: center;
+        }
+        .kontak-item div h5 {
+            font-weight: 600;
+        }
+        .kontak-item div p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        .kontak-form {
+            background: var(--white);
+            padding: 32px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+        }
+        .kontak-form input,
+        .kontak-form textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-sm);
+            font-family: var(--font);
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            transition: var(--transition);
+            background: var(--bg-light);
+        }
+        .kontak-form input:focus,
+        .kontak-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(10, 59, 122, 0.08);
+        }
+        .kontak-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--primary);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 40px 0 24px;
+            margin-top: 40px;
+        }
+        .footer .container {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+        .footer-top .logo {
+            color: var(--white);
+        }
+        .footer-top .logo i {
+            color: #f9c74f;
+        }
+        .footer-social a {
+            color: var(--white);
+            font-size: 1.4rem;
+            margin-left: 20px;
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+        .footer-social a:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 992px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .profil-grid {
+                grid-template-columns: 1fr;
+            }
+            .baksos {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .baksos .icon-big {
+                order: -1;
+            }
+            .kontak-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background: var(--white);
+                padding: 24px;
+                border-radius: var(--radius-sm);
+                box-shadow: var(--shadow);
+                position: absolute;
+                top: 70px;
+                right: 16px;
+                left: 16px;
+                gap: 16px;
+                align-items: stretch;
+            }
+            .nav-links.open {
+                display: flex;
+            }
+            .hamburger {
+                display: block;
+            }
+            .search-box input {
+                width: 100px;
+            }
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .profil-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+            .agenda-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            .agenda-item .info {
+                flex-wrap: wrap;
+            }
+            .footer-top {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .footer-social a {
+                margin: 0 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 50px 0 70px;
+            }
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.85rem;
+            }
+            .container {
+                padding: 0 16px;
+            }
+            .profil-stats {
+                grid-template-columns: 1fr;
+            }
+            .baksos {
+                padding: 32px 20px;
+            }
+            .kontak-form {
+                padding: 20px;
+            }
+        }
+
+        /* ===== ANIMASI SCROLL ===== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* tombol ke google sites (contoh) */
+        .btn-google-sites {
+            background: #4285f4;
+            color: white;
+        }
+        .btn-google-sites:hover {
+            background: #3367d6;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-ear-listen"></i>
+                PERAUDI<span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#beranda">Beranda</a></li>
+                <li><a href="#profil">Profil</a></li>
+                <li><a href="#kegiatan">Kegiatan</a></li>
+                <li><a href="#berita">Berita</a></li>
+                <li><a href="#agenda">Agenda</a></li>
+                <li><a href="#dokumen">Dokumen</a></li>
+                <li><a href="#keanggotaan">Anggota</a></li>
+                <li><a href="#baksos">Bakti Sosial</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+                <li>
+                    <div class="search-box">
+                        <input type="text" placeholder="Cari..." id="searchInput" />
+                        <button id="searchBtn"><i class="fas fa-search"></i></button>
+                    </div>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="beranda">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Mewujudkan <span>Kesehatan Pendengaran</span> untuk Indonesia</h1>
+                <p>
+                    Perhimpunan Audiologis Indonesia (PERAUDI) berkomitmen meningkatkan
+                    kualitas layanan audiologi melalui pendidikan, penelitian, dan pengabdian masyarakat.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#profil" class="btn"><i class="fas fa-arrow-right"></i> Tentang Kami</a>
+                    <a href="#kegiatan" class="btn btn-outline"><i class="fas fa-calendar-alt"></i> Kegiatan</a>
+                    <a href="#" class="btn btn-red" onclick="alert('Arahkan ke halaman Google Sites Anda')"><i class="fas fa-external-link-alt"></i> Google Sites</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="card-icon">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <p>Bersama untuk pendengaran yang lebih baik</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROFIL ===== -->
+    <section id="profil">
+        <div class="container">
+            <div class="profil-grid fade-up">
+                <div class="profil-text">
+                    <div class="section-title"><i class="fas fa-users"></i> Profil Organisasi</div>
+                    <p>
+                        <strong>Perhimpunan Audiologis Indonesia (PERAUDI)</strong> adalah organisasi profesi
+                        yang menghimpun para audiologis, tenaga kesehatan, dan akademisi di bidang audiologi.
+                        Berdiri sejak tahun 2005, kami berdedikasi untuk meningkatkan standar pelayanan kesehatan
+                        pendengaran dan keseimbangan di Indonesia.
+                    </p>
+                    <p>
+                        Visi kami adalah menjadi pusat unggulan audiologi di Asia Tenggara, dengan misi
+                        mengembangkan kompetensi, advokasi kebijakan, dan kolaborasi lintas sektor.
+                    </p>
+                    <div class="profil-stats">
+                        <div class="stat-item">
+                            <div class="number">150+</div>
+                            <div class="label">Anggota</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="number">10</div>
+                            <div class="label">Kota</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="number">10</div>
+                            <div class="label">Tahun Berdiri</div>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-red" style="margin-top:20px;" onclick="alert('Arahkan ke halaman Google Sites tentang Profil')"><i class="fas fa-chevron-circle-right"></i> Selengkapnya</a>
+                </div>
+                <div class="profil-image">
+                    <i class="fas fa-stethoscope"></i>
+                    <h3>Komitmen Kualitas</h3>
+                    <p>Standar pelayanan audiologi terbaik untuk masyarakat Indonesia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== KEGIATAN ILMIAH & P2KB ===== -->
+    <section id="kegiatan" style="background:var(--white);">
+        <div class="container">
+            <div class="text-center fade-up">
+                <div class="section-title" style="justify-content:center;"><i class="fas fa-microscope"></i> Kegiatan Ilmiah & P2KB</div>
+                <p class="section-subtitle">Program Pendidikan dan Pelatihan Berkelanjutan untuk meningkatkan kompetensi audiologis.</p>
+            </div>
+            <div class="kegiatan-grid fade-up">
+                <div class="kegiatan-card">
+                    <div class="icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h4>Seminar & Workshop</h4>
+                    <p>Pelatihan terkini tentang diagnostik audiologi, rehabilitasi, dan alat bantu dengar.</p>
+                </div>
+                <div class="kegiatan-card">
+                    <div class="icon"><i class="fas fa-file-alt"></i></div>
+                    <h4>P2KB (Pendidikan Berkelanjutan)</h4>
+                    <p>Program kredit untuk tenaga kesehatan yang terakreditasi dan berbasis bukti.</p>
+                </div>
+                <div class="kegiatan-card">
+                    <div class="icon"><i class="fas fa-hand-holding-heart"></i></div>
+                    <h4>Bakti Sosial Audiologi</h4>
+                    <p>Skrining pendengaran gratis di daerah terpencil dan komunitas rentan.</p>
+                </div>
+                <div class="kegiatan-card">
+                    <div class="icon"><i class="fas fa-book-open"></i></div>
+                    <h4>Publikasi Ilmiah</h4>
+                    <p>Jurnal dan artikel penelitian audiologi yang diakui nasional dan internasional.</p>
+                </div>
+            </div>
+            <div class="text-center" style="margin-top:32px;">
+                <a href="#" class="btn" onclick="alert('Arahkan ke halaman Google Sites Kegiatan')"><i class="fas fa-calendar-check"></i> Lihat Semua Kegiatan</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== BERITA & ARTIKEL ===== -->
+    <section id="berita">
+        <div class="container">
+            <div class="text-center fade-up">
+                <div class="section-title" style="justify-content:center;"><i class="fas fa-newspaper"></i> Berita & Artikel</div>
+                <p class="section-subtitle">Informasi terbaru seputar audiologi dan kesehatan pendengaran.</p>
+            </div>
+            <div class="berita-grid fade-up">
+                <div class="berita-card">
+                    <div class="img-placeholder"><i class="fas fa-ear-listen"></i></div>
+                    <div class="body">
+                        <span class="tag">Berita</span>
+                        <h4>Peluncuran Program Skrining Pendengaran Nasional</h4>
+                        <p>Kerjasama dengan Kementerian Kesehatan untuk deteksi dini gangguan pendengaran pada bayi.</p>
+                        <div class="meta"><i class="far fa-clock"></i> 20 Juni 2026</div>
+                    </div>
+                </div>
+                <div class="berita-card">
+                    <div class="img-placeholder"><i class="fas fa-chart-line"></i></div>
+                    <div class="body">
+                        <span class="tag">Artikel</span>
+                        <h4>Tren Teknologi Alat Bantu Dengar 2026</h4>
+                        <p>Inovasi AI dan konektivitas bluetooth dalam rehabilitasi pendengaran.</p>
+                        <div class="meta"><i class="far fa-clock"></i> 5 Juni 2026</div>
+                    </div>
+                </div>
+                <div class="berita-card">
+                    <div class="img-placeholder"><i class="fas fa-users"></i></div>
+                    <div class="body">
+                        <span class="tag">Pengumuman</span>
+                        <h4>Kongres Audiologi Indonesia ke-8</h4>
+                        <p>Pendaftaran dibuka untuk peserta dan pemakalah. Segera daftarkan diri Anda!</p>
+                        <div class="meta"><i class="far fa-clock"></i> 25 Mei 2026</div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center" style="margin-top:32px;">
+                <a href="#" class="btn btn-outline" onclick="alert('Arahkan ke halaman Google Sites Berita')"><i class="fas fa-arrow-right"></i> Berita Lainnya</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== AGENDA KEGIATAN ===== -->
+    <section id="agenda" style="background:var(--white);">
+        <div class="container">
+            <div class="text-center fade-up">
+                <div class="section-title" style="justify-content:center;"><i class="fas fa-calendar-alt"></i> Agenda Kegiatan</div>
+                <p class="section-subtitle">Jadwal kegiatan mendatang yang dapat diikuti oleh anggota dan masyarakat.</p>
+            </div>
+            <div class="agenda-list fade-up">
+                <div class="agenda-item">
+                    <div class="info">
+                        <div class="date">
+                            <div class="day">15</div>
+                            <div class="month">Agu</div>
+                        </div>
+                        <div class="details">
+                            <h5>Webinar: Gangguan Pendengaran pada Lansia</h5>
+                            <p>Pembicara: dr. Andi Wijaya, Sp.THT-KL (Audiologis) • Zoom</p>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-sm" style="padding:8px 20px;" onclick="alert('Arahkan ke halaman Google Sites Agenda')">Detail</a>
+                </div>
+                <div class="agenda-item">
+                    <div class="info">
+                        <div class="date">
+                            <div class="day">22</div>
+                            <div class="month">Agu</div>
+                        </div>
+                        <div class="details">
+                            <h5>Workshop P2KB: Audiometri Klinis</h5>
+                            <p>RS Pusat Otak Nasional • Jakarta</p>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-sm" style="padding:8px 20px;" onclick="alert('Arahkan ke halaman Google Sites Agenda')">Detail</a>
+                </div>
+                <div class="agenda-item">
+                    <div class="info">
+                        <div class="date">
+                            <div class="day">5</div>
+                            <div class="month">Sep</div>
+                        </div>
+                        <div class="details">
+                            <h5>Bakti Sosial Skrining Pendengaran</h5>
+                            <p>Puskesmas Kecamatan X • Pendaftaran terbuka untuk relawan</p>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-sm" style="padding:8px 20px;" onclick="alert('Arahkan ke halaman Google Sites Agenda')">Detail</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DOKUMEN / DOWNLOAD ===== -->
+    <section id="dokumen">
+        <div class="container">
+            <div class="text-center fade-up">
+                <div class="section-title" style="justify-content:center;"><i class="fas fa-folder-open"></i> Dokumen & Download</div>
+                <p class="section-subtitle">Akses panduan, formulir, dan materi edukasi audiologi.</p>
+            </div>
+            <div class="dokumen-grid fade-up">
+                <div class="dokumen-item">
+                    <i class="fas fa-file-pdf"></i>
+                    <h5>Panduan Skrining Pendengaran</h5>
+                    <p style="font-size:0.8rem; color:var(--text-muted);">PDF • 2.4 MB</p>
+                    <a href="#" class="btn btn-sm" style="margin-top:12px; padding:6px 18px;" onclick="alert('Download PDF')"><i class="fas fa-download"></i> Unduh</a>
+                </div>
+                <div class="dokumen-item">
+                    <i class="fas fa-file-pdf"></i>
+                    <h5>Formulir Keanggotaan</h5>
+                    <p style="font-size:0.8rem; color:var(--text-muted);">PDF • 1.1 MB</p>
+                    <a href="#" class="btn btn-sm" style="margin-top:12px; padding:6px 18px;" onclick="alert('Download PDF')"><i class="fas fa-download"></i> Unduh</a>
+                </div>
+                <div class="dokumen-item">
+                    <i class="fas fa-file-pdf"></i>
+                    <h5>Jurnal Audiologi Vol. 12</h5>
+                    <p style="font-size:0.8rem; color:var(--text-muted);">PDF • 5.6 MB</p>
+                    <a href="#" class="btn btn-sm" style="margin-top:12px; padding:6px 18px;" onclick="alert('Download PDF')"><i class="fas fa-download"></i> Unduh</a>
+                </div>
+                <div class="dokumen-item">
+                    <i class="fas fa-file-pdf"></i>
+                    <h5>KTI Audiologi 2025</h5>
+                    <p style="font-size:0.8rem; color:var(--text-muted);">PDF • 3.2 MB</p>
+                    <a href="#" class="btn btn-sm" style="margin-top:12px; padding:6px 18px;" onclick="alert('Download PDF')"><i class="fas fa-download"></i> Unduh</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== KEANGGOTAAN & KTA ===== -->
+    <section id="keanggotaan" style="background:var(--white);">
+        <div class="container">
+            <div class="text-center fade-up">
+                <div class="section-title" style="justify-content:center;"><i class="fas fa-id-card"></i> Keanggotaan & KTA</div>
+                <p class="section-subtitle">Bergabunglah menjadi anggota PERAUDI dan nikmati berbagai manfaat.</p>
+            </div>
+            <div class="anggota-grid fade-up">
+                <div class="anggota-card">
+                    <i class="fas fa-user-md"></i>
+                    <h4>Anggota Biasa</h4>
+                    <p>Audiologis, dokter spesialis THT-KL, dan tenaga kesehatan terkait.</p>
+                    <a href="#" class="btn btn-sm" onclick="alert('Arahkan ke halaman Google Sites Pendaftaran')"><i class="fas fa-user-plus"></i> Daftar</a>
+                </div>
+                <div class="anggota-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h4>Anggota Muda</h4>
+                    <p>Mahasiswa kedokteran atau profesi kesehatan yang sedang dalam pendidikan.</p>
+                    <a href="#" class="btn btn-sm" onclick="alert('Arahkan ke halaman Google Sites Pendaftaran')"><i class="fas fa-user-plus"></i> Daftar</a>
+                </div>
+                <div class="anggota-card">
+                    <i class="fas fa-handshake"></i>
+                    <h4>Anggota Kehormatan</h4>
+                    <p>Individu atau institusi yang berkontribusi dalam pengembangan audiologi.</p>
+                    <a href="#" class="btn btn-sm" onclick="alert('Arahkan ke halaman Google Sites Pendaftaran')"><i class="fas fa-user-plus"></i> Daftar</a>
+                </div>
+            </div>
+            <div class="text-center" style="margin-top:24px;">
+                <a href="#" class="btn btn-red" onclick="alert('Arahkan ke halaman Google Sites KTA')"><i class="fas fa-credit-card"></i> Cek KTA Online</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== BAKTI SOSIAL ===== -->
+    <section id="baksos">
+        <div class="container">
+            <div class="baksos fade-up">
+                <div>
+                    <h2><i class="fas fa-heart" style="color:#f9c74f; margin-right:12px;"></i> Bakti Sosial Audiologi</h2>
+                    <p>
+                        Kami secara rutin mengadakan kegiatan skrining pendengaran gratis, edukasi kesehatan telinga,
+                        dan bantuan alat bantu dengar bagi masyarakat kurang mampu.
+                    </p>
+                    <a href="#" class="btn" onclick="alert('Arahkan ke halaman Google Sites Bakti Sosial')"><i class="fas fa-hand-holding-heart"></i> Ikuti Kami</a>
+                </div>
+                <div class="icon-big">
+                    <i class="fas fa-hands-helping"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== KONTAK ===== -->
+    <section id="kontak">
+        <div class="container">
+            <div class="text-center fade-up">
+                <div class="section-title" style="justify-content:center;"><i class="fas fa-phone-alt"></i> Hubungi Kami</div>
+                <p class="section-subtitle">Silakan hubungi kami untuk informasi lebih lanjut atau kerja sama.</p>
+            </div>
+            <div class="kontak-grid fade-up">
+                <div class="kontak-info">
+                    <div class="kontak-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h5>Alamat</h5>
+                            <p>Jl. Audiologi No. 45, Jakarta Pusat 10210</p>
+                        </div>
+                    </div>
+                    <div class="kontak-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h5>Telepon</h5>
+                            <p>+62xxxxxxxx</p>
+                        </div>
+                    </div>
+                    <div class="kontak-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h5>Email</h5>
+                            <p>dppperaudi@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="kontak-item">
+                        <i class="fas fa-globe"></i>
+                        <div>
+                            <h5>Website</h5>
+                            <p>peraudi.netlify.com</p>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-red" onclick="alert('Arahkan ke halaman Google Sites Kontak')"><i class="fas fa-external-link-alt"></i> Google Sites</a>
+                </div>
+                <div class="kontak-form">
+                    <h4 style="margin-bottom:16px;">Kirim Pesan</h4>
+                    <form onsubmit="event.preventDefault(); alert('Pesan terkirim (demo)');">
+                        <input type="text" placeholder="Nama Lengkap" required />
+                        <input type="email" placeholder="Email" required />
+                        <input type="text" placeholder="Subjek" />
+                        <textarea placeholder="Isi pesan..." required></textarea>
+                        <button type="submit" class="btn" style="width:100%; justify-content:center;"><i class="fas fa-paper-plane"></i> Kirim</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="logo">
+                    <i class="fas fa-ear-listen"></i>
+                    PERAUDI<span style="color:#f9c74f;"></span>
+                </div>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Perhimpunan Audiologis Indonesia. Semua hak dilindungi. | Dikelola dengan <i class="fas fa-heart" style="color:#f9c74f;"></i> untuk kesehatan pendengaran.
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== SCRIPT ===== -->
+    <script>
+        // Hamburger toggle
+        document.getElementById('hamburger').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('open');
+        });
+
+        // Close menu on link click (mobile)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('open');
+            });
+        });
+
+        // Search (demo)
+        document.getElementById('searchBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            const query = document.getElementById('searchInput').value.trim();
+            if (query) {
+                alert('Pencarian untuk: "' + query + '" (arahkan ke hasil pencarian Google Sites)');
+            } else {
+                alert('Masukkan kata kunci pencarian.');
+            }
+        });
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('searchBtn').click();
+            }
+        });
+
+        // Scroll animation (Intersection Observer)
+        const fadeElements = document.querySelectorAll('.fade-up');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -40px 0px'
+        });
+        fadeElements.forEach(el => observer.observe(el));
+
+        // Smooth scroll for nav links (already using scroll-behavior: smooth)
+    </script>
+
+</body>
+</html>
